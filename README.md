@@ -88,7 +88,4 @@ python scripts/run_pipeline.py --video attendy.mp4 --out output
 2. **T5/Grammar Correction Model** - Text-to-Text Transformer for fluency
 
 ## 👨‍💻 Author
-
-Final Year Project - AI/ML Portfolio
-
----
+Salman Malhi
