@@ -1,0 +1,30 @@
+# Core dependencies
+torch>=2.0.0
+openai-whisper>=20231117
+ffmpeg-python>=0.2.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart>=0.0.6
+
+# Text processing
+nltk>=3.8.1
+transformers>=4.35.0
+sentencepiece>=0.1.99
+
+# Grammar correction models
+happytransformer>=2.4.1
+
+# Audio processing
+pydub>=0.25.1
+moviepy>=1.0.3
+torchaudio>=2.0.0
+
+# Utilities
+python-dotenv>=1.0.0
+aiofiles>=23.2.1
+
+# For web deployment (React Native backend)
+fastapi-cors>=0.0.6
+
+# Colab specific (optional)
+# google-colab

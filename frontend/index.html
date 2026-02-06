@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video to Fluent Text</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🎬</span>
+                <h1>AI Video to Fluent Text</h1>
+            </div>
+            <p class="tagline">Convert spoken English from videos into fluent, professional text using AI</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="upload-card">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Video or Audio</h3>
+                        <p>Drag & drop your file here, or click to browse</p>
+                        <p class="file-types">Supported: MP4, AVI, MOV, MKV, MP3, WAV (up to 10+ min)</p>
+                        <input type="file" id="fileInput" accept="video/*,audio/*" hidden>
+                        <button class="btn btn-primary" id="browseBtn">Choose File</button>
+                    </div>
+                    
+                    <!-- File Preview -->
+                    <div class="file-preview hidden" id="filePreview">
+                        <div class="file-info">
+                            <span class="file-icon">📄</span>
+                            <div class="file-details">
+                                <span class="file-name" id="fileName"></span>
+                                <span class="file-size" id="fileSize"></span>
+                            </div>
+                            <button class="btn-remove" id="removeFile">✕</button>
+                        </div>
+                        
+                        <!-- Language Selection -->
+                        <div class="language-options">
+                            <label for="languageSelect">🌐 Language:</label>
+                            <select id="languageSelect">
+                                <option value="">Auto-detect</option>
+                                <option value="en">English</option>
+                                <option value="ur">Urdu (اردو)</option>
+                                <option value="hi">Hindi (हिन्दी)</option>
+                                <option value="ar">Arabic (العربية)</option>
+                                <option value="es">Spanish</option>
+                                <option value="fr">French</option>
+                                <option value="de">German</option>
+                                <option value="zh">Chinese</option>
+                            </select>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="translateCheckbox">
+                                Translate to English
+                            </label>
+                        </div>
+                        
+                        <button class="btn btn-success btn-process" id="processBtn">
+                            🚀 Process Video
+                        </button>
+                    </div>
+                </div>
+
+                <!-- OR Divider -->
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+                <!-- Text Input Section -->
+                <div class="text-input-card">
+                    <h3>✏️ Improve Text Directly</h3>
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Paste your text here to improve grammar and fluency..."
+                        rows="4"
+                    ></textarea>
+                    <select id="taskSelect" class="task-select">
+                        <option value="Fix grammar">Fix Grammar</option>
+                        <option value="Make this more fluent">Make Fluent</option>
+                        <option value="Rewrite this professionally">Professional Rewrite</option>
+                    </select>
+                    <button class="btn btn-primary" id="improveTextBtn">
+                        ✨ Improve Text
+                    </button>
+                </div>
+            </section>
+
+            <!-- Loading State -->
+            <section class="loading-section hidden" id="loadingSection">
+                <div class="loading-card">
+                    <div class="spinner"></div>
+                    <h3 id="loadingText">Processing your video...</h3>
+                    <div class="progress-steps">
+                        <div class="step active" id="step1">
+                            <span class="step-icon">🎵</span>
+                            <span>Extracting Audio</span>
+                        </div>
+                        <div class="step" id="step2">
+                            <span class="step-icon">🎤</span>
+                            <span>Speech to Text</span>
+                        </div>
+                        <div class="step" id="step3">
+                            <span class="step-icon">✨</span>
+                            <span>Improving Text</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section hidden" id="resultsSection">
+                <h2>📊 Results</h2>
+                
+                <!-- Language Info -->
+                <div class="language-info" id="languageInfo">
+                    <span class="language-badge" id="detectedLanguage">English</span>
+                    <span class="duration-badge" id="audioDuration"></span>
+                </div>
+                
+                <div class="results-grid">
+                    <!-- Original Text -->
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3>🎤 Original Transcription</h3>
+                            <button class="btn-copy" data-target="originalText" title="Copy to clipboard">
+                                📋 Copy
+                            </button>
+                        </div>
+                        <div class="result-content" id="originalText">
+                            <!-- Transcribed text will appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Cleaned Text -->
+                    <div class="result-card">
+                        <div class="result-header">
+                            <h3>🧹 Cleaned Text</h3>
+                            <button class="btn-copy" data-target="cleanedText" title="Copy to clipboard">
+                                📋 Copy
+                            </button>
+                        </div>
+                        <div class="result-content" id="cleanedText">
+                            <!-- Cleaned text will appear here -->
+                        </div>
+                    </div>
+
+                    <!-- Improved Text -->
+                    <div class="result-card featured">
+                        <div class="result-header">
+                            <h3>✨ Improved Fluent Text</h3>
+                            <button class="btn-copy" data-target="improvedText" title="Copy to clipboard">
+                                📋 Copy
+                            </button>
+                        </div>
+                        <div class="result-content" id="improvedText">
+                            <!-- Improved text will appear here -->
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" id="resetBtn">
+                    🔄 Process Another File
+                </button>
+            </section>
+
+            <!-- Error Section -->
+            <section class="error-section hidden" id="errorSection">
+                <div class="error-card">
+                    <span class="error-icon">❌</span>
+                    <h3>Something went wrong</h3>
+                    <p id="errorMessage"></p>
+                    <button class="btn btn-primary" id="retryBtn">Try Again</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with 🤖 AI • Whisper + Transformers</p>
+            <p class="tech-stack">PyTorch • FastAPI • Neural Networks</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
